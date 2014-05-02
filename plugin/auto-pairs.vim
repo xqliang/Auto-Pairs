@@ -184,7 +184,12 @@ function! AutoPairsInsert(key)
     endif
   endif
 
-  return open.close."\<Left>"
+  " Auto pair only if next character is EOL or blank
+  if current_char == '' || match(current_char, '\s') == 0
+    return open.close."\<Left>"
+  end
+
+  return a:key
 endfunction
 
 function! AutoPairsDelete()
