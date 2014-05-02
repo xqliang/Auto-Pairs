@@ -174,8 +174,9 @@ function! AutoPairsInsert(key)
     endif
   endif
 
-  " Auto pair only if next character is EOL or blank
-  if current_char == '' || match(current_char, '\s') == 0
+  " Auto pair only if next character is EOL or blank, or prev character in
+  " AutoPairs
+  if current_char == '' || match(current_char, '\s') == 0 || has_key(b:AutoPairs, prev_char)
     return open.close."\<Left>"
   end
 
